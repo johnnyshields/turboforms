@@ -10,8 +10,9 @@ $.fn.extend
       el.data('remote', true)
       el.data('type', 'html')
 
-      el.bind 'ajax:beforeSend', (event, data, status, xhr) ->
+      el.bind 'ajax:beforeSend', (event, xhr, settings) ->
         TL.triggerEvent 'page:fetch'
+        TL.reflectNewUrl settings.url
 
       el.bind 'ajax:complete', (event, xhr, status) ->
         doc = createDocument xhr.responseText
